@@ -1,0 +1,1485 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Salon kosmetyki i masażu w Kielcach, ks. Stanisława Konarskiego 9. Masaż na fotelu Ceragem, stopy, twarz, brwi i rytuały. Zabiegi bez ryzyka przemiany w żabę.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b200d">
+<link rel="icon" type="image/png" href="assets/znak.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Dotyk Wiedźmy · Salon kosmetyki i masażu">
+<meta property="og:description" content="Zabiegi bez ryzyka przemiany w żabę. Kielce, Konarskiego 9.">
+<meta property="og:url" content="https://thepadi.github.io/dotyk-wiedzmy/">
+<meta property="og:image" content="https://thepadi.github.io/dotyk-wiedzmy/assets/podglad.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<title>Dotyk Wiedźmy · Salon kosmetyki i masażu w Kielcach</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
+
+<style>
+/* Układ: strona główna jako nocna scena wokół pieczęci salonu, pod nią wyrocznia i spis zabiegów.
+   Podstrony (Zabiegi, Opinie, Wizyta, Kontakt) przełączane zakładkami na górze.
+   Kolory pobrane z logo: leśna zieleń i złoto. Motyw celowo jeden, nocny. */
+:root {
+  --las:      #0b200d;
+  --las-2:    #0f2812;
+  --las-3:    #143319;
+  --zloto:    #d6be84;
+  --zloto-2:  #b4975a;
+  --blask:    #fbefcd;
+  --pergamin: #efe7d3;
+  --mgla:     #a6ad97;
+  --linia:    rgba(214, 190, 132, .22);
+  color-scheme: dark;
+
+  --disp: "Cinzel", "Trajan Pro", Georgia, serif;
+  --body: "Cormorant Garamond", Garamond, Georgia, serif;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--las); color: var(--pergamin);
+  font-family: var(--body); font-size: 19px; font-weight: 500; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p, ol, ul, figure { margin: 0; }
+ol, ul { list-style: none; padding: 0; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+img { max-width: 100%; }
+
+.etykieta { font-family: var(--disp); font-size: .7rem; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: var(--zloto-2); }
+h2 { font-family: var(--disp); font-weight: 500; font-size: clamp(1.7rem, 4.6vw, 2.6rem); line-height: 1.15; letter-spacing: .03em; color: var(--zloto); text-wrap: balance; }
+h3 { font-family: var(--disp); font-weight: 500; color: var(--zloto); letter-spacing: .03em; line-height: 1.2; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--disp); font-size: .74rem; font-weight: 600; letter-spacing: .17em; text-transform: uppercase;
+  padding: 15px 24px; border: 1px solid var(--zloto); background: transparent; color: var(--zloto);
+  text-decoration: none; cursor: pointer;
+  transition: box-shadow .35s, background .35s, color .35s;
+}
+.btn:hover { box-shadow: 0 0 0 1px var(--zloto), 0 0 30px rgba(214, 190, 132, .32); }
+.btn-zloty { background: var(--zloto); color: var(--las); }
+.btn-zloty:hover { background: var(--blask); }
+
+/* ————— zakładki na górze ————— */
+.gora {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50;
+  background: rgba(11, 32, 13, .88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--linia);
+}
+.gora-in { max-width: 1180px; margin: 0 auto; padding-inline: 16px; display: flex; align-items: center; gap: 14px; height: 66px; }
+.znak { flex: none; background: none; border: 0; padding: 0; cursor: pointer; display: flex; align-items: center; gap: 11px; }
+.znak img { width: 42px; height: 42px; display: block; }
+.znak span { font-family: var(--disp); font-size: .86rem; letter-spacing: .14em; color: var(--zloto); white-space: nowrap; }
+@media (max-width: 1060px) { .znak span { display: none; } }
+.menu { display: flex; gap: 2px; flex: 1 1 auto; min-width: 0; justify-content: center; overflow-x: auto; scrollbar-width: none; }
+.menu::-webkit-scrollbar { display: none; }
+.menu button {
+  position: relative; flex: none; background: none; border: 0; cursor: pointer;
+  font-family: var(--disp); font-size: .72rem; font-weight: 500; letter-spacing: .17em; text-transform: uppercase;
+  color: var(--mgla); padding: 12px 13px 14px; white-space: nowrap; transition: color .3s;
+}
+.menu button:hover { color: var(--pergamin); }
+.menu button[aria-current="page"] { color: var(--zloto); }
+.menu button::after {
+  content: ""; position: absolute; left: 50%; bottom: 1px; width: 10px; height: 10px;
+  transform: translateX(-50%) scale(0); background: var(--zloto); transition: transform .35s;
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+}
+.menu button[aria-current="page"]::after { transform: translateX(-50%) scale(1); }
+.menu .krotko { display: none; }
+.tel-gora { flex: none; font-family: var(--disp); font-size: .74rem; letter-spacing: .12em; color: var(--zloto); text-decoration: none; border: 1px solid var(--linia); padding: 9px 14px; }
+@media (max-width: 960px) { .tel-gora { display: none; } .menu { justify-content: flex-start; } }
+@media (max-width: 560px) {
+  .gora-in { gap: 8px; padding-inline: 12px; }
+  .menu button { padding-inline: 8px; font-size: .62rem; letter-spacing: .07em; }
+  .menu button[data-view="start"] { display: none; }
+  .menu .dlugo { display: none; } .menu .krotko { display: inline; }
+  .znak img { width: 34px; height: 34px; }
+}
+
+/* ————— scena główna ————— */
+.hero { position: relative; overflow: hidden; isolation: isolate; padding-block: 46px 64px; }
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(ellipse 55% 46% at 50% 30%, rgba(214, 190, 132, .11), transparent 70%);
+}
+#niebo, #pyl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+#niebo { z-index: 0; }
+#pyl { z-index: 6; }
+
+.orbita { position: absolute; inset: 0; max-width: 1260px; margin: 0 auto; z-index: 1; pointer-events: none; }
+.obiekt {
+  position: absolute; color: var(--zloto);
+  transform: translate3d(calc(var(--px, 0) * var(--g) * 1px), calc(var(--py, 0) * var(--g) * 1px), 0);
+  transition: transform 1s cubic-bezier(.2, .7, .2, 1);
+}
+.obiekt > svg { display: block; width: 100%; height: auto; overflow: visible; animation: unos var(--d, 9s) ease-in-out infinite; animation-delay: var(--o, 0s); }
+@keyframes unos {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+  50%      { transform: translateY(-13px) rotate(calc(var(--rot, 0deg) * -1)); }
+}
+.o-ksiezyc { --g: .5;  width: 104px; left: 8%;  top: 6%;  --d: 11s; }
+.o-kula    { --g: 1.1; width: 150px; left: 3%;  top: 40%; --d: 9s; --o: -2s; }
+.o-eliksir { --g: .8;  width: 104px; left: 17%; top: 67%; --d: 8s; --o: -4s; --rot: 3deg; }
+.o-karta   { --g: .7;  width: 118px; right: 8%; top: 8%;  --d: 10s; --o: -1s; --rot: 4deg; }
+.o-roller  { --g: 1.2; width: 72px;  right: 3%; top: 44%; --d: 7s; --o: -3s; --rot: 7deg; }
+.o-swieca  { --g: .6;  width: 60px;  right: 18%; top: 66%; --d: 12s; --o: -5s; }
+@media (max-width: 1120px) { .o-eliksir, .o-swieca { display: none; } }
+@media (max-width: 760px) {
+  .o-kula, .o-roller { display: none; }
+  .o-ksiezyc { width: 58px; left: 4%; top: 18px; }
+  .o-karta { width: 62px; right: 4%; top: 14px; }
+}
+
+.kula-wir { transform-box: view-box; transform-origin: 70px 64px; animation: obrot 26s linear infinite; }
+.kula-mgla { animation: mgla 7s ease-in-out infinite alternate; }
+@keyframes mgla { to { transform: translateX(-26px); } }
+.oko { transform-box: fill-box; transform-origin: center; }
+.oko.mrug { animation: mrug .26s ease-in-out; }
+@keyframes mrug { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.06); } }
+.zrenica { transition: transform .35s cubic-bezier(.2, .7, .2, 1); }
+.fala { animation: fala 3.4s linear infinite; }
+@keyframes fala { to { transform: translateX(-60px); } }
+.babel { transform-box: fill-box; animation: babel 3.2s ease-in infinite; }
+.babel:nth-child(2) { animation-delay: .8s; }
+.babel:nth-child(3) { animation-delay: 1.7s; }
+.babel:nth-child(4) { animation-delay: 2.4s; }
+@keyframes babel { 0% { transform: translateY(0); opacity: 0; } 18% { opacity: .95; } 100% { transform: translateY(-38px); opacity: 0; } }
+.plomien { transform-box: fill-box; transform-origin: 50% 100%; animation: plomien 2.4s ease-in-out infinite; }
+@keyframes plomien {
+  0%, 100% { transform: scale(1, 1) skewX(0); }
+  18% { transform: scale(.93, 1.07) skewX(2.5deg); }
+  37% { transform: scale(1.05, .94) skewX(-2deg); }
+  56% { transform: scale(.96, 1.09) skewX(1.2deg); }
+  78% { transform: scale(1.03, .96) skewX(-1.6deg); }
+}
+.aura { transform-box: fill-box; transform-origin: center; animation: aura 2.4s ease-in-out infinite; }
+@keyframes aura { 0%, 100% { opacity: .85; transform: scale(1); } 40% { opacity: .55; transform: scale(.92); } 70% { opacity: 1; transform: scale(1.06); } }
+
+.hero-tresc { position: relative; z-index: 3; max-width: 760px; margin: 0 auto; padding-inline: 22px; text-align: center; }
+.pieczec { position: relative; width: min(330px, 68vw); aspect-ratio: 1; margin: 0 auto; }
+.pieczec::before {
+  content: ""; position: absolute; inset: -20%; border-radius: 50%;
+  background: radial-gradient(circle, rgba(214, 190, 132, .17), transparent 62%);
+  animation: oddech 7s ease-in-out infinite;
+}
+@keyframes oddech { 0%, 100% { opacity: .7; transform: scale(.96); } 50% { opacity: 1; transform: scale(1.04); } }
+.pieczec img { position: relative; display: block; width: 100%; height: auto; }
+.pierscien { position: absolute; inset: -13%; width: 126%; height: 126%; color: var(--zloto); pointer-events: none; animation: obrot 160s linear infinite; }
+.pierscien.wolny { animation-duration: 240s; animation-direction: reverse; }
+@keyframes obrot { to { transform: rotate(360deg); } }
+
+.haslo {
+  font-style: italic; font-weight: 500; font-size: clamp(2rem, 5.6vw, 3.3rem); line-height: 1.08; margin-top: calc(min(330px, 68vw) * .15);
+  color: var(--zloto);
+  background: linear-gradient(105deg, var(--zloto) 0%, var(--zloto) 42%, var(--blask) 50%, var(--zloto) 58%, var(--zloto) 100%);
+  background-size: 300% 100%; background-position: 100% 0;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  animation: polysk 8s ease-in-out infinite;
+  text-wrap: balance;
+}
+@keyframes polysk { 0%, 35% { background-position: 100% 0; } 65%, 100% { background-position: 0 0; } }
+.bio { max-width: 44ch; margin: 16px auto 0; font-size: 1.2rem; line-height: 1.5; color: var(--pergamin); opacity: .9; }
+.czyny { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 28px; }
+.stan { margin-top: 22px; display: inline-flex; align-items: center; gap: 10px; font-family: var(--disp); font-size: .68rem; letter-spacing: .17em; text-transform: uppercase; color: var(--mgla); }
+.stan i { width: 7px; height: 7px; border-radius: 50%; background: var(--mgla); flex: none; }
+.stan.otwarte { color: var(--zloto); }
+.stan.otwarte i { background: var(--zloto); animation: puls 2.2s ease-out infinite; }
+@keyframes puls { 0% { box-shadow: 0 0 0 0 rgba(214, 190, 132, .55); } 100% { box-shadow: 0 0 0 9px rgba(214, 190, 132, 0); } }
+
+.zaba { position: absolute; left: -118px; bottom: 0; width: 76px; background: none; border: 0; padding: 0; cursor: pointer; color: var(--zloto); }
+.zaba svg { display: block; width: 100%; height: auto; overflow: visible; }
+.zaba-oczy { transform-box: fill-box; transform-origin: center; animation: zmruz 6s infinite; }
+@keyframes zmruz { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.1); } }
+.zaba.skok svg { animation: skok .6s cubic-bezier(.3, .7, .4, 1); }
+@keyframes skok { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-22px) rotate(-6deg); } 70% { transform: translateY(2px); } }
+.dymek {
+  position: absolute; bottom: calc(100% + 8px); left: 42%;
+  white-space: nowrap; background: var(--pergamin); color: var(--las);
+  font-family: var(--body); font-style: italic; font-weight: 600; font-size: 1rem;
+  padding: 7px 13px; border-radius: 14px 14px 14px 3px;
+  opacity: 0; transform: translateY(6px); transition: opacity .35s, transform .35s; pointer-events: none;
+}
+.zaba:hover .dymek, .zaba:focus-visible .dymek, .zaba.mowi .dymek { opacity: 1; transform: none; }
+@media (max-width: 1040px) {
+  .zaba { position: relative; left: auto; bottom: auto; margin: 26px auto 0; display: block; width: 64px; }
+  .dymek { left: 50%; transform: translate(-50%, 6px); border-radius: 14px; }
+  .zaba:hover .dymek, .zaba:focus-visible .dymek, .zaba.mowi .dymek { transform: translate(-50%, 0); }
+}
+
+.fazy { display: block; width: min(300px, 70%); height: auto; margin: 0 auto; color: var(--zloto-2); }
+
+/* ————— wyrocznia ————— */
+.sekcja { max-width: 1120px; margin: 0 auto; padding-inline: 22px; padding-block: 72px; }
+.sekcja-glowa { max-width: 640px; margin-bottom: 38px; }
+.sekcja-glowa h2 { margin-top: 12px; }
+.sekcja-glowa p { color: var(--mgla); margin-top: 12px; font-size: 1.1rem; }
+
+.wyrocznia-uklad { display: grid; gap: 34px; align-items: center; }
+@media (min-width: 920px) { .wyrocznia-uklad { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 52px; } }
+.talia { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 2.4vw, 20px); }
+.karta {
+  position: relative; aspect-ratio: 2 / 3; border: 0; padding: 0; background: none; cursor: pointer;
+  perspective: 1000px;
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--ty, 0px));
+  transition: transform .35s ease, opacity .6s, filter .6s;
+}
+.karta:hover { --ty: -10px; }
+.karta-in { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform 1s cubic-bezier(.2, .75, .2, 1); }
+.karta.odkryta .karta-in { transform: rotateY(180deg); }
+.rewers, .awers { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 10px; overflow: hidden; }
+.rewers { background: var(--las-2); border: 1px solid var(--zloto-2); box-shadow: 0 16px 40px rgba(0, 0, 0, .45); color: var(--zloto); }
+.rewers svg { display: block; width: 100%; height: 100%; }
+.karta:hover .rewers { box-shadow: 0 18px 46px rgba(0, 0, 0, .5), 0 0 34px rgba(214, 190, 132, .22); }
+.awers {
+  transform: rotateY(180deg);
+  background: radial-gradient(circle at 50% 38%, var(--las-3), var(--las-2) 72%);
+  border: 1px solid var(--zloto);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  padding: 16px 10px; text-align: center;
+  box-shadow: 0 0 44px rgba(214, 190, 132, .28);
+}
+.awers::before { content: ""; position: absolute; inset: 6px; border: 1px solid var(--linia); border-radius: 6px; pointer-events: none; }
+.aw-num { font-family: var(--disp); font-size: 1.25rem; color: var(--zloto); }
+.aw-ico { width: 48px; height: 48px; color: var(--zloto); }
+.aw-naz { font-family: var(--disp); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--pergamin); }
+@media (max-width: 520px) { .aw-ico { width: 34px; height: 34px; } .aw-num { font-size: 1rem; } .aw-naz { font-size: .6rem; letter-spacing: .08em; } }
+.karta.zgaszona { opacity: .3; --ty: 12px; filter: saturate(.5); pointer-events: none; }
+.talia.tasuje .karta:nth-child(1) { animation: tasuj-l .7s cubic-bezier(.4, .1, .3, 1); }
+.talia.tasuje .karta:nth-child(2) { animation: tasuj-s .7s cubic-bezier(.4, .1, .3, 1); }
+.talia.tasuje .karta:nth-child(3) { animation: tasuj-p .7s cubic-bezier(.4, .1, .3, 1); }
+@keyframes tasuj-l { 45% { transform: translateX(104%) rotate(5deg); } }
+@keyframes tasuj-s { 45% { transform: translateY(-14px) rotate(-3deg); } }
+@keyframes tasuj-p { 45% { transform: translateX(-104%) rotate(-5deg); } }
+
+.przepowiednia { position: relative; border: 1px solid var(--linia); background: var(--las-2); padding: 34px 30px; min-height: 320px; display: flex; flex-direction: column; justify-content: center; }
+.przepowiednia::before, .przepowiednia::after {
+  content: ""; position: absolute; width: 14px; height: 14px; background: var(--zloto);
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+}
+.przepowiednia::before { top: -7px; left: -7px; }
+.przepowiednia::after { bottom: -7px; right: -7px; }
+.p-tytul { font-size: 1.45rem; margin-top: 10px; }
+.p-tekst { font-style: italic; font-size: 1.42rem; line-height: 1.4; margin-top: 14px; color: var(--pergamin); }
+.p-meta { font-family: var(--disp); font-size: .76rem; letter-spacing: .16em; text-transform: uppercase; color: var(--zloto); margin-top: 18px; font-variant-numeric: lining-nums; }
+.p-akcje { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.przepowiednia.swieza > * { animation: wejdz .7s cubic-bezier(.2, .7, .2, 1) both; }
+.przepowiednia.swieza > *:nth-child(2) { animation-delay: .08s; }
+.przepowiednia.swieza > *:nth-child(3) { animation-delay: .16s; }
+.przepowiednia.swieza > *:nth-child(4) { animation-delay: .24s; }
+.przepowiednia.swieza > *:nth-child(5) { animation-delay: .32s; }
+
+/* ————— spis zabiegów ————— */
+.spis-lista { border-top: 1px solid var(--linia); }
+.spis-poz {
+  width: 100%; display: grid; grid-template-columns: 46px 44px minmax(0, 1fr) auto; align-items: center; gap: 16px;
+  padding: 20px 6px; background: none; border: 0; border-bottom: 1px solid var(--linia); cursor: pointer; text-align: left;
+  transition: background .35s;
+}
+.spis-poz:hover { background: rgba(214, 190, 132, .05); }
+.spis-num { font-family: var(--disp); color: var(--zloto-2); font-size: 1.05rem; }
+.spis-ico { width: 40px; height: 40px; color: var(--zloto); transition: transform .5s; }
+.spis-poz:hover .spis-ico { transform: rotate(-8deg) scale(1.1); }
+.spis-tekst b { display: block; font-family: var(--disp); font-weight: 500; color: var(--zloto); font-size: 1.15rem; letter-spacing: .03em; }
+.spis-tekst small { display: block; color: var(--mgla); font-size: 1.02rem; margin-top: 2px; }
+.spis-cena { font-family: var(--disp); font-size: .8rem; letter-spacing: .12em; color: var(--pergamin); white-space: nowrap; font-variant-numeric: lining-nums; }
+.spis-cena::after { content: " \2192"; color: var(--zloto); }
+@media (max-width: 600px) {
+  .spis-poz { grid-template-columns: 34px minmax(0, 1fr) auto; gap: 12px; }
+  .spis-num { display: none; }
+  .spis-ico { width: 32px; height: 32px; }
+}
+
+/* ————— gabinet i głos ————— */
+.dwie { display: grid; gap: 40px; }
+@media (min-width: 880px) { .dwie { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 60px; align-items: start; } }
+.tresc p + p { margin-top: 16px; }
+.tresc p { max-width: 54ch; }
+.tresc .cicho { color: var(--mgla); }
+.cytat { position: relative; border: 1px solid var(--linia); padding: 34px 30px 28px; background: var(--las-2); }
+.cytat::before { content: ""; position: absolute; top: -14px; left: 20px; width: 52px; height: 28px; background: var(--las) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46 32'%3E%3Cg fill='%23d6be84'%3E%3Cpath d='M2 24a7 7 0 1 0 7-7c0-5 2.6-9.6 7.8-12.2L15 2C7 5 2 13 2 24Z'/%3E%3Cpath d='M24 24a7 7 0 1 0 7-7c0-5 2.6-9.6 7.8-12.2L37 2C29 5 24 13 24 24Z'/%3E%3C/g%3E%3C/svg%3E") center / 34px auto no-repeat; }
+.cytat p { font-style: italic; font-size: 1.36rem; line-height: 1.45; }
+.cytat footer { margin-top: 16px; font-family: var(--disp); font-size: .72rem; letter-spacing: .17em; text-transform: uppercase; color: var(--zloto); }
+.oceny { display: flex; flex-wrap: wrap; gap: 14px 36px; margin-top: 24px; }
+.oceny div { display: flex; align-items: baseline; gap: 10px; }
+.oceny b { font-family: var(--disp); font-weight: 500; font-size: 2rem; color: var(--zloto); font-variant-numeric: lining-nums; }
+.oceny span { font-family: var(--disp); font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--mgla); }
+.link-zloty { display: inline-block; margin-top: 22px; background: none; border: 0; padding: 0 0 3px; cursor: pointer; font-family: var(--disp); font-size: .72rem; letter-spacing: .17em; text-transform: uppercase; color: var(--zloto); border-bottom: 1px solid var(--zloto-2); }
+
+.pasek { border-top: 1px solid var(--linia); border-bottom: 1px solid var(--linia); }
+.pasek-in { max-width: 1120px; margin: 0 auto; padding-inline: 22px; display: grid; gap: 0; }
+@media (min-width: 760px) { .pasek-in { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.pasek-kol { padding-block: 26px; }
+@media (min-width: 760px) { .pasek-kol + .pasek-kol { border-left: 1px solid var(--linia); padding-left: 28px; } }
+@media (max-width: 759px) { .pasek-kol + .pasek-kol { border-top: 1px solid var(--linia); } }
+.pasek-kol p { margin-top: 8px; font-size: 1.08rem; }
+.pasek-kol .duzo { font-family: var(--disp); font-size: 1.3rem; color: var(--zloto); letter-spacing: .06em; font-variant-numeric: lining-nums; }
+
+/* ————— podstrony ————— */
+.strona { max-width: 1000px; margin: 0 auto; padding-inline: 22px; padding-block: 56px 84px; }
+.strona-glowa { display: grid; gap: 20px; align-items: center; margin-bottom: 40px; }
+@media (min-width: 760px) { .strona-glowa { grid-template-columns: 140px minmax(0, 1fr); gap: 36px; } }
+.ornament { width: 124px; height: auto; color: var(--zloto); overflow: visible; }
+@media (max-width: 759px) { .ornament { width: 86px; } }
+.strona-glowa h2 { font-size: clamp(2rem, 6vw, 3rem); margin-top: 10px; }
+.wstep { color: var(--mgla); max-width: 58ch; margin-top: 12px; font-size: 1.1rem; }
+
+.skoki { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.skok { background: none; border: 1px solid var(--linia); cursor: pointer; font-family: var(--disp); font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--zloto); padding: 9px 13px; transition: border-color .3s; }
+.skok:hover { border-color: var(--zloto); }
+
+.krag { padding-block: 34px 10px; border-top: 1px solid var(--linia); scroll-margin-top: 90px; }
+.krag-glowa { display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: 16px; align-items: center; margin-bottom: 18px; }
+.krag-num { font-family: var(--disp); color: var(--zloto-2); font-size: 1.05rem; min-width: 28px; }
+.krag-ico { width: 44px; height: 44px; color: var(--zloto); }
+.krag-glowa h3 { font-size: 1.45rem; }
+.krag-glowa p { color: var(--mgla); font-size: 1.04rem; margin-top: 2px; }
+@media (max-width: 600px) {
+  .krag-glowa { grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: start; }
+  .krag-num { display: none; }
+  .krag-ico { width: 34px; height: 34px; margin-top: 2px; }
+}
+.poz { padding-block: 15px; border-bottom: 1px solid var(--linia); }
+.wiersz { display: flex; align-items: baseline; gap: 10px; }
+.wiersz .nazwa { font-weight: 600; font-size: 1.18rem; min-width: 0; }
+.wiersz .kropki { flex: 1 1 auto; min-width: 18px; border-bottom: 1px dotted rgba(214, 190, 132, .4); transform: translateY(-6px); }
+.wiersz .cena { font-family: var(--disp); font-size: .98rem; color: var(--zloto); white-space: nowrap; font-variant-numeric: lining-nums; }
+.poz .opis { color: var(--mgla); font-size: 1rem; margin-top: 3px; }
+.dopisek { margin-block: 18px 6px; padding-left: 16px; border-left: 1px solid var(--zloto); color: var(--mgla); font-size: 1.02rem; max-width: 56ch; }
+
+.glosy { display: grid; gap: 22px; }
+@media (min-width: 720px) { .glosy { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.glos { position: relative; border: 1px solid var(--linia); background: var(--las-2); padding: 30px 26px 24px; }
+.glos::before { content: ""; position: absolute; top: -14px; left: 20px; width: 52px; height: 28px; background: var(--las) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46 32'%3E%3Cg fill='%23d6be84'%3E%3Cpath d='M2 24a7 7 0 1 0 7-7c0-5 2.6-9.6 7.8-12.2L15 2C7 5 2 13 2 24Z'/%3E%3Cpath d='M24 24a7 7 0 1 0 7-7c0-5 2.6-9.6 7.8-12.2L37 2C29 5 24 13 24 24Z'/%3E%3C/g%3E%3C/svg%3E") center / 34px auto no-repeat; }
+.glos p { font-style: italic; font-size: 1.3rem; line-height: 1.45; }
+.glos footer { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; }
+.glos footer b { font-family: var(--disp); font-weight: 500; color: var(--zloto); letter-spacing: .1em; font-size: .9rem; }
+.glos footer span { font-family: var(--disp); font-size: .64rem; letter-spacing: .16em; text-transform: uppercase; color: var(--mgla); }
+.przypis { margin-top: 28px; color: var(--mgla); font-size: 1.02rem; }
+.przypis a { color: var(--zloto); }
+
+.zwoj { background: var(--las-2); border: 1px solid var(--linia); padding: 26px; max-width: 580px; }
+.pole { margin-bottom: 20px; }
+.pole label { display: block; margin-bottom: 8px; }
+select, input[type="text"] {
+  width: 100%; font-family: var(--body); font-size: 1.12rem; font-weight: 500; color: var(--pergamin);
+  background: transparent; border: 0; border-bottom: 1px solid var(--zloto-2); padding: 8px 2px; border-radius: 0;
+}
+select option { background: var(--las); color: var(--pergamin); }
+.zapis { border-top: 1px solid var(--linia); padding-top: 18px; font-style: italic; font-size: 1.18rem; line-height: 1.55; }
+.zapis b { display: block; font-style: normal; font-family: var(--disp); font-weight: 500; font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--zloto); margin-bottom: 8px; font-variant-numeric: lining-nums; }
+.zwoj-stopka { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 22px; }
+.gotowe { font-family: var(--disp); font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--zloto); }
+.inne-drogi { margin-top: 26px; color: var(--mgla); max-width: 58ch; }
+.inne-drogi a { color: var(--zloto); }
+
+.dane { border-top: 1px solid var(--linia); max-width: 680px; }
+.dana { display: grid; gap: 6px; padding-block: 20px; border-bottom: 1px solid var(--linia); }
+@media (min-width: 600px) { .dana { grid-template-columns: 150px minmax(0, 1fr); gap: 24px; align-items: baseline; } }
+.dana .co { font-size: 1.15rem; }
+.dana .co.duze { font-family: var(--disp); font-size: 1.5rem; color: var(--zloto); letter-spacing: .05em; font-variant-numeric: lining-nums; }
+.dana .pod { color: var(--mgla); font-size: 1.02rem; margin-top: 4px; }
+.dana a { color: var(--zloto); }
+.godziny { display: grid; gap: 4px; max-width: 320px; }
+.godziny div { display: flex; justify-content: space-between; gap: 16px; font-variant-numeric: lining-nums tabular-nums; padding: 3px 8px; margin-inline: -8px; }
+.godziny .wolne { color: var(--mgla); }
+.godziny .dzis { background: rgba(214, 190, 132, .1); color: var(--zloto); }
+
+.stopa { border-top: 1px solid var(--linia); }
+.stopa-in { max-width: 1120px; margin: 0 auto; padding-inline: 22px; padding-block: 34px 44px; display: grid; gap: 22px; align-items: center; }
+@media (min-width: 820px) { .stopa-in { grid-template-columns: auto minmax(0, 1fr) auto; gap: 34px; } }
+.stopa-znak { display: flex; align-items: center; gap: 14px; }
+.stopa-znak img { width: 56px; height: 56px; }
+.stopa-znak b { display: block; font-family: var(--disp); font-weight: 500; color: var(--zloto); letter-spacing: .12em; }
+.stopa-znak span { font-style: italic; color: var(--mgla); font-size: 1rem; }
+.stopa-dane { color: var(--mgla); font-size: 1rem; }
+.stopa-linki { display: flex; gap: 18px; }
+.stopa-linki a { font-family: var(--disp); font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--zloto); text-decoration: none; }
+
+/* ————— pasek wersji demonstracyjnej ————— */
+body { padding-bottom: calc(42px + env(safe-area-inset-bottom, 0px)); }
+.demo-pasek {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+  padding: 11px 16px calc(11px + env(safe-area-inset-bottom, 0px));
+  background: rgba(15, 40, 18, .96); border-top: 1px solid var(--zloto-2);
+  display: flex; align-items: center; justify-content: center; gap: 10px; text-align: center;
+  font-family: var(--disp); font-size: .64rem; letter-spacing: .18em; text-transform: uppercase; color: var(--zloto);
+}
+.demo-pasek::before, .demo-pasek::after {
+  content: ""; flex: none; width: 8px; height: 8px; background: var(--zloto);
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+}
+.demo-pasek .krotko { display: none; }
+@media (max-width: 640px) { .demo-pasek .dlugo { display: none; } .demo-pasek .krotko { display: inline; } }
+.stopa-prawa { grid-column: 1 / -1; border-top: 1px solid var(--linia); padding-top: 18px; color: var(--mgla); font-size: .95rem; font-style: italic; }
+
+/* ————— przejścia między podstronami ————— */
+.widok.wchodzi .wejscie { animation: wejdz .8s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--i, 0) * .09s); }
+@keyframes wejdz { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.widok.wchodzi .r[style*="--L"] { stroke-dasharray: var(--L); animation: rysuj 2s cubic-bezier(.6, .1, .3, 1) both; animation-delay: calc(var(--i, 0) * .12s + .1s); }
+@keyframes rysuj { from { stroke-dashoffset: var(--L); } to { stroke-dashoffset: 0; } }
+
+:focus-visible { outline: 1px solid var(--zloto); outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .haslo { background: none; -webkit-text-fill-color: var(--zloto); }
+}
+</style>
+</head>
+<body>
+<!-- wspólne symbole -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="gw4" viewBox="-10 -10 20 20"><path d="M0-10C.9-2.6 2.6-.9 10 0 2.6.9.9 2.6 0 10-.9 2.6-2.6.9-10 0-2.6-.9-.9-2.6 0-10Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-kregoslup" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="15" y="3" width="10" height="5" rx="2.2"/><rect x="14" y="10.5" width="12" height="5" rx="2.2"/><rect x="13.5" y="18" width="13" height="5" rx="2.2"/><rect x="14" y="25.5" width="12" height="5" rx="2.2"/><rect x="15" y="33" width="10" height="5" rx="2.2"/><path d="M8.5 6c-3 9-3 19 0 28M31.5 6c3 9 3 19 0 28" opacity=".5"/></g></symbol>
+    <symbol id="i-stopa" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 37c-5 0-7.5-4.5-7-10.5S15 15 19.5 15s6.5 4 6 9.5S25 37 20 37Z"/><circle cx="14.5" cy="9.5" r="2.4"/><circle cx="19.5" cy="7" r="2"/><circle cx="24" cy="8.3" r="1.7"/><circle cx="27.2" cy="11.4" r="1.4"/></g></symbol>
+    <symbol id="i-ziola" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 37V6"/><path d="M20 13c-6 0-9-3-9-8 6 0 9 3 9 8Z"/><path d="M20 21c6 0 9-3 9-8-6 0-9 3-9 8Z"/><path d="M20 29c-6 0-9-3-9-8 6 0 9 3 9 8Z"/></g></symbol>
+    <symbol id="i-eliksir" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h8"/><path d="M17.5 4v9.6A11.5 11.5 0 1 0 22.5 13.6V4"/><path d="M10 26q5-3 10 0t10 0"/></g></symbol>
+    <symbol id="i-swieca" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="15" y="17" width="10" height="17" rx="1.2"/><path d="M20 17v-3"/><path d="M20 3c3.2 4 3.2 7.5 0 9.5-3.2-2-3.2-5.5 0-9.5Z" fill="currentColor"/><path d="M10 36h20"/></g></symbol>
+    <symbol id="i-oko" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 22q16-13 32 0-16 13-32 0Z"/><circle cx="20" cy="22" r="5.2"/><circle cx="20" cy="22" r="2" fill="currentColor"/><path d="M20 9V5M12 11l-2-3.4M28 11l2-3.4"/></g></symbol>
+    <symbol id="i-kula" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="17" r="12"/><path d="M13.5 12a8 8 0 0 1 5-4" opacity=".6"/><path d="M12 31h16l2.5 5h-21Z"/></g><use href="#gw4" x="20" y="14" width="7" height="7"/></symbol>
+    <symbol id="i-ksiezyc" viewBox="0 0 40 40"><mask id="mKs"><rect width="40" height="40" fill="#fff"/><circle cx="26" cy="15" r="12" fill="#000"/></mask><circle cx="19" cy="21" r="13" fill="currentColor" stroke="none" mask="url(#mKs)"/></symbol>
+    <symbol id="i-gwiazda" viewBox="0 0 40 40"><use href="#gw4" x="8" y="8" width="24" height="24"/><use href="#gw4" x="28" y="4" width="8" height="8"/></symbol>
+  </defs>
+</svg>
+
+<header class="gora">
+  <div class="gora-in">
+    <button class="znak" type="button" data-view="start" aria-label="Strona główna">
+      <img src="assets/znak.png" alt="">
+      <span>Dotyk Wiedźmy</span>
+    </button>
+    <nav class="menu" aria-label="Strony">
+      <button type="button" data-view="start" aria-current="page">Start</button>
+      <button type="button" data-view="zabiegi">Zabiegi</button>
+      <button type="button" data-view="opinie">Opinie</button>
+      <button type="button" data-view="wizyta"><span class="dlugo">Umów wizytę</span><span class="krotko">Umów</span></button>
+      <button type="button" data-view="kontakt">Kontakt</button>
+    </nav>
+    <a class="tel-gora" href="tel:+48727144451">727 144 451</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ═════════════ STRONA GŁÓWNA ═════════════ -->
+<div class="widok" id="v-start">
+
+  <section class="hero">
+    <canvas id="niebo" aria-hidden="true"></canvas>
+
+    <div class="orbita" aria-hidden="true">
+      <!-- księżyc -->
+      <div class="obiekt o-ksiezyc">
+        <svg viewBox="0 0 120 120" fill="none">
+          <defs>
+            <mask id="mKs1"><rect width="120" height="120" fill="#fff"/><circle cx="74" cy="46" r="36" fill="#000"/></mask>
+            <radialGradient id="poswiata"><stop offset="0" stop-color="#d6be84" stop-opacity=".26"/><stop offset="1" stop-color="#d6be84" stop-opacity="0"/></radialGradient>
+          </defs>
+          <circle cx="56" cy="62" r="58" fill="url(#poswiata)"/>
+          <circle cx="56" cy="62" r="40" fill="currentColor" mask="url(#mKs1)"/>
+          <use href="#gw4" x="90" y="12" width="16" height="16"/>
+          <use href="#gw4" x="100" y="72" width="8" height="8"/>
+        </svg>
+      </div>
+
+      <!-- kryształowa kula -->
+      <div class="obiekt o-kula">
+        <svg viewBox="0 0 140 170" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <defs><clipPath id="kulaC"><circle cx="70" cy="64" r="50"/></clipPath></defs>
+          <g clip-path="url(#kulaC)">
+            <g class="kula-wir" stroke="none" fill="currentColor">
+              <use href="#gw4" x="42" y="38" width="15" height="15"/>
+              <use href="#gw4" x="80" y="28" width="9" height="9"/>
+              <use href="#gw4" x="86" y="64" width="17" height="17"/>
+              <use href="#gw4" x="48" y="78" width="9" height="9"/>
+              <use href="#gw4" x="66" y="54" width="7" height="7"/>
+              <circle cx="34" cy="62" r="1.3"/><circle cx="62" cy="98" r="1.1"/><circle cx="98" cy="46" r="1.2"/>
+              <circle cx="80" cy="90" r="1.4"/><circle cx="58" cy="26" r="1"/><circle cx="104" cy="80" r="1"/>
+            </g>
+            <path class="kula-mgla" d="M8 78c18-14 34 8 56-4s34-18 56-2s30 10 40 2" opacity=".35"/>
+          </g>
+          <circle cx="70" cy="64" r="52"/>
+          <path d="M38 42a40 40 0 0 1 22-17" opacity=".6"/>
+          <path d="M42 112c8 8 48 8 56 0"/>
+          <path d="M38 122h64l8 22H30Z"/>
+          <path d="M24 150h92"/>
+        </svg>
+      </div>
+
+      <!-- eliksir -->
+      <div class="obiekt o-eliksir">
+        <svg viewBox="0 0 120 160" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <defs><clipPath id="flaszaC"><path d="M52 44A44 44 0 1 0 68 44Z"/></clipPath></defs>
+          <g clip-path="url(#flaszaC)">
+            <path class="fala" d="M-60 94q15-7 30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0V150H-60Z" fill="currentColor" fill-opacity=".2"/>
+            <g fill="currentColor" stroke="none">
+              <circle class="babel" cx="46" cy="124" r="2.6"/>
+              <circle class="babel" cx="62" cy="128" r="2"/>
+              <circle class="babel" cx="74" cy="122" r="2.4"/>
+              <circle class="babel" cx="56" cy="116" r="1.6"/>
+            </g>
+          </g>
+          <path d="M52 22V44A44 44 0 1 0 68 44V22"/>
+          <rect x="48" y="8" width="24" height="14" rx="3"/>
+          <path d="M47 27h26" opacity=".6"/>
+          <path d="M30 88a32 32 0 0 1 12-22" opacity=".55"/>
+          <use href="#gw4" x="86" y="18" width="14" height="14"/>
+        </svg>
+      </div>
+
+      <!-- karta z okiem -->
+      <div class="obiekt o-karta">
+        <svg viewBox="0 0 120 180" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+          <defs><clipPath id="okoC"><path d="M26 96Q60 66 94 96Q60 126 26 96Z"/></clipPath></defs>
+          <rect x="3" y="3" width="114" height="174" rx="7"/>
+          <rect x="10" y="10" width="100" height="160" rx="3" opacity=".5"/>
+          <g opacity=".75">
+            <path d="M60 60V50M78 64.8l5-8.6M91.2 78l8.6-5M91.2 114l8.6 5M78 127.2l5 8.6M60 132v10M42 127.2l-5 8.6M28.8 114l-8.6 5M28.8 78l-8.6-5M42 64.8l-5-8.6"/>
+          </g>
+          <g class="oko" id="oko">
+            <path id="oko-bialko" d="M26 96Q60 66 94 96Q60 126 26 96Z"/>
+            <g clip-path="url(#okoC)">
+              <g class="zrenica" id="oko-zrenica">
+                <circle cx="60" cy="96" r="12"/>
+                <circle cx="60" cy="96" r="5.6" fill="currentColor"/>
+                <circle cx="63" cy="93" r="1.6" stroke="none" style="fill: var(--las)"/>
+              </g>
+            </g>
+          </g>
+          <use href="#gw4" x="52" y="20" width="16" height="16"/>
+          <path d="M42 157h36" opacity=".5"/>
+        </svg>
+      </div>
+
+      <!-- roller -->
+      <div class="obiekt o-roller">
+        <svg viewBox="0 0 90 200" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="14" y="16" width="62" height="28" rx="14"/>
+          <path d="M30 22v16M45 20v20M60 22v16" opacity=".35"/>
+          <path d="M14 30H9v26q0 6 6 6h60q6 0 6-6V30h-5"/>
+          <path d="M45 62v26"/>
+          <rect x="39" y="88" width="12" height="72" rx="6"/>
+          <path d="M45 160v12"/>
+          <rect x="30" y="172" width="30" height="14" rx="7"/>
+          <use href="#gw4" x="70" y="96" width="12" height="12"/>
+        </svg>
+      </div>
+
+      <!-- świeca -->
+      <div class="obiekt o-swieca">
+        <svg viewBox="0 0 70 170" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <defs><radialGradient id="plomienG"><stop offset="0" stop-color="#f0c97a" stop-opacity=".5"/><stop offset="1" stop-color="#f0c97a" stop-opacity="0"/></radialGradient></defs>
+          <circle class="aura" cx="35" cy="44" r="34" fill="url(#plomienG)" stroke="none"/>
+          <g class="plomien" stroke="none">
+            <path d="M35 20C45 34 45 48 35 58C25 48 25 34 35 20Z" fill="currentColor"/>
+            <path d="M35 36C39 42 39 50 35 54C31 50 31 42 35 36Z" style="fill: var(--las)" opacity=".55"/>
+          </g>
+          <path d="M35 58v10"/>
+          <rect x="20" y="68" width="30" height="86" rx="2"/>
+          <path d="M25 68v10a2.2 2.2 0 0 0 4.4 0V68M40 68v15a2.2 2.2 0 0 0 4.4 0V68"/>
+          <path d="M6 154h58M11 154q24 11 48 0"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="hero-tresc">
+      <h1 class="pieczec">
+        <svg class="pierscien" viewBox="-200 -200 400 400" fill="none" stroke="currentColor" aria-hidden="true">
+          <circle r="192" stroke-width=".9" stroke-dasharray="1.5 7" opacity=".75"/>
+          <use href="#gw4" x="-9" y="-201" width="18" height="18"/>
+          <use href="#gw4" x="183" y="-9" width="18" height="18"/>
+          <use href="#gw4" x="-9" y="183" width="18" height="18"/>
+          <use href="#gw4" x="-201" y="-9" width="18" height="18"/>
+          <use href="#gw4" x="130.8" y="-140.8" width="10" height="10"/>
+          <use href="#gw4" x="130.8" y="130.8" width="10" height="10"/>
+          <use href="#gw4" x="-140.8" y="130.8" width="10" height="10"/>
+          <use href="#gw4" x="-140.8" y="-140.8" width="10" height="10"/>
+        </svg>
+        <svg class="pierscien wolny" viewBox="-200 -200 400 400" fill="none" stroke="currentColor" aria-hidden="true">
+          <circle r="178" stroke-width=".6" opacity=".3"/>
+          <circle r="170" stroke-width=".6" stroke-dasharray="20 14" opacity=".22"/>
+        </svg>
+        <img src="assets/logo.png" alt="Dotyk Wiedźmy, salon kosmetyki i masażu w Kielcach" width="500" height="500">
+      </h1>
+
+      <p class="haslo">Zabiegi bez ryzyka przemiany w żabę.</p>
+      <p class="bio">U mnie relaks tak głęboki, że zapominasz o byłym. Masaże tak dobre, że aż sąsiadka przestała narzekać.</p>
+      <div class="czyny">
+        <a class="btn btn-zloty" href="tel:+48727144451">Zadzwoń · 727 144 451</a>
+        <button class="btn" type="button" data-view="zabiegi">Zabiegi i ceny</button>
+      </div>
+      <p class="stan" data-stan><i></i><span>Poniedziałek do piątku, 11:00 do 17:00</span></p>
+
+      <button class="zaba" type="button" aria-label="Żaba z koroną">
+        <span class="dymek">Ja umówiłem się gdzie indziej.</span>
+        <svg viewBox="0 0 80 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M33 10l2-7 5 4.5 5-4.5 2 7Z" fill="currentColor"/>
+          <g class="zaba-oczy">
+            <circle cx="27" cy="20" r="8"/><circle cx="53" cy="20" r="8"/>
+            <circle cx="28.5" cy="21" r="3" fill="currentColor"/><circle cx="54.5" cy="21" r="3" fill="currentColor"/>
+          </g>
+          <path d="M8 46C8 33 20 26 40 26s32 7 32 20c0 9-14 14-32 14S8 55 8 46Z"/>
+          <path d="M29 41q11 7 22 0"/>
+          <path d="M17 57q-8 3-13 1M63 57q8 3 13 1"/>
+        </svg>
+      </button>
+    </div>
+
+    <canvas id="pyl" aria-hidden="true"></canvas>
+  </section>
+
+  <svg class="fazy" viewBox="0 0 300 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+    <path d="M0 12h90M210 12h90" opacity=".5"/>
+    <circle cx="104" cy="12" r="7"/>
+    <circle cx="127" cy="12" r="7"/><path d="M127 5a7 7 0 0 1 0 14Z" fill="currentColor"/>
+    <circle cx="150" cy="12" r="7" fill="currentColor"/>
+    <circle cx="173" cy="12" r="7"/><path d="M173 5a7 7 0 0 0 0 14Z" fill="currentColor"/>
+    <circle cx="196" cy="12" r="7"/>
+  </svg>
+
+  <!-- wyrocznia -->
+  <section class="sekcja" aria-labelledby="wyrocznia-h">
+    <div class="sekcja-glowa">
+      <p class="etykieta">Wyrocznia</p>
+      <h2 id="wyrocznia-h">Nie wiesz, od czego zacząć? Wylosuj kartę.</h2>
+      <p>Trzy karty, jedna podpowiedź. Wybierz tę, która cię woła.</p>
+    </div>
+    <div class="wyrocznia-uklad">
+      <div class="talia" id="talia">
+        <button class="karta" type="button" aria-label="Odkryj pierwszą kartę" aria-pressed="false">
+          <span class="karta-in">
+            <span class="rewers"><svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><use href="#rewers-wzor"/></svg></span>
+            <span class="awers"><span class="aw-num"></span><svg class="aw-ico" aria-hidden="true"><use href="#i-gwiazda"/></svg><span class="aw-naz"></span></span>
+          </span>
+        </button>
+        <button class="karta" type="button" aria-label="Odkryj drugą kartę" aria-pressed="false">
+          <span class="karta-in">
+            <span class="rewers"><svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><use href="#rewers-wzor"/></svg></span>
+            <span class="awers"><span class="aw-num"></span><svg class="aw-ico" aria-hidden="true"><use href="#i-gwiazda"/></svg><span class="aw-naz"></span></span>
+          </span>
+        </button>
+        <button class="karta" type="button" aria-label="Odkryj trzecią kartę" aria-pressed="false">
+          <span class="karta-in">
+            <span class="rewers"><svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><use href="#rewers-wzor"/></svg></span>
+            <span class="awers"><span class="aw-num"></span><svg class="aw-ico" aria-hidden="true"><use href="#i-gwiazda"/></svg><span class="aw-naz"></span></span>
+          </span>
+        </button>
+      </div>
+
+      <div class="przepowiednia" id="przepowiednia" aria-live="polite">
+        <p class="etykieta" id="p-etykieta">Przepowiednia</p>
+        <h3 class="p-tytul" id="p-tytul">Wybierz jedną kartę</h3>
+        <p class="p-tekst" id="p-tekst">Wyrocznia podpowie, od którego zabiegu zacząć. Karty się nie obrażą, jeśli wybierzesz coś innego.</p>
+        <p class="p-meta" id="p-meta" hidden></p>
+        <div class="p-akcje" id="p-akcje" hidden>
+          <button class="btn btn-zloty" type="button" id="p-umow" data-view="wizyta">Umów ten zabieg</button>
+          <button class="btn" type="button" id="p-tasuj">Potasuj jeszcze raz</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- spis zabiegów -->
+  <section class="sekcja" style="padding-top: 24px" aria-labelledby="spis-h">
+    <div class="sekcja-glowa">
+      <p class="etykieta">Pięć kręgów</p>
+      <h2 id="spis-h">Spis zabiegów</h2>
+    </div>
+    <ol class="spis-lista">
+      <li><button class="spis-poz" type="button" data-view="zabiegi" data-cel="k-1">
+        <span class="spis-num">I</span><svg class="spis-ico" aria-hidden="true"><use href="#i-kregoslup"/></svg>
+        <span class="spis-tekst"><b>Fotel Ceragem</b><small>Masaż, który zaczyna się od skanu kręgosłupa.</small></span>
+        <span class="spis-cena">od 30 zł</span>
+      </button></li>
+      <li><button class="spis-poz" type="button" data-view="zabiegi" data-cel="k-2">
+        <span class="spis-num">II</span><svg class="spis-ico" aria-hidden="true"><use href="#i-stopa"/></svg>
+        <span class="spis-tekst"><b>Stopy</b><small>Dla tych, które cały dzień spędzają na nogach.</small></span>
+        <span class="spis-cena">od 80 zł</span>
+      </button></li>
+      <li><button class="spis-poz" type="button" data-view="zabiegi" data-cel="k-3">
+        <span class="spis-num">III</span><svg class="spis-ico" aria-hidden="true"><use href="#i-ziola"/></svg>
+        <span class="spis-tekst"><b>Twarz i skóra</b><small>Zioła, borowina i Dermapen.</small></span>
+        <span class="spis-cena">od 120 zł</span>
+      </button></li>
+      <li><button class="spis-poz" type="button" data-view="zabiegi" data-cel="k-4">
+        <span class="spis-num">IV</span><svg class="spis-ico" aria-hidden="true"><use href="#i-oko"/></svg>
+        <span class="spis-tekst"><b>Brwi, rzęsy, paznokcie</b><small>Henna, regulacja i laminacja.</small></span>
+        <span class="spis-cena">od 40 zł</span>
+      </button></li>
+      <li><button class="spis-poz" type="button" data-view="zabiegi" data-cel="k-5">
+        <span class="spis-num">V</span><svg class="spis-ico" aria-hidden="true"><use href="#i-swieca"/></svg>
+        <span class="spis-tekst"><b>Rytuały</b><small>Świeca Hopi, lampa i trening EMS na leżąco.</small></span>
+        <span class="spis-cena">od 40 zł</span>
+      </button></li>
+    </ol>
+  </section>
+
+  <!-- gabinet i głos -->
+  <section class="sekcja" style="padding-top: 24px">
+    <div class="dwie">
+      <div>
+        <p class="etykieta">Gabinet</p>
+        <h2 style="margin-top: 12px">Z zewnątrz zwykły pawilon</h2>
+        <div class="tresc" style="margin-top: 20px">
+          <p>W środku cisza, ciepłe światło i zapach olejków. Zabieg prowadzi jedna osoba od pierwszej do ostatniej minuty, bez recepcji i bez kolejki.</p>
+          <p class="cicho">Przychodzisz z napiętymi barkami, z ciężkimi nogami, z kłopotem z zasypianiem albo po prostu po godzinę dla siebie. Program dobieram do tego, z czym przychodzisz.</p>
+        </div>
+      </div>
+      <div>
+        <figure class="cytat">
+          <p>Upominek w postaci vouchera okazał się doskonałym wyborem. Mąż jest zadowolony z zabiegu, który był bardzo relaksujący, a także profesjonalnym i miłym podejściem pani masażystki.</p>
+          <footer>Milena · Groupon</footer>
+        </figure>
+        <div class="oceny">
+          <div><b>5,0</b><span>Google · 8 opinii</span></div>
+          <div><b>4,8</b><span>Groupon · 33 opinie</span></div>
+        </div>
+        <button class="link-zloty" type="button" data-view="opinie">Wszystkie opinie</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="pasek">
+    <div class="pasek-in">
+      <div class="pasek-kol">
+        <p class="etykieta">Gdzie</p>
+        <p>ks. Stanisława Konarskiego 9, pawilon<br>25-340 Kielce</p>
+      </div>
+      <div class="pasek-kol">
+        <p class="etykieta">Kiedy</p>
+        <p>Poniedziałek do piątku, 11:00 do 17:00</p>
+        <p class="stan" data-stan style="margin-top: 8px"><i></i><span></span></p>
+      </div>
+      <div class="pasek-kol">
+        <p class="etykieta">Telefon</p>
+        <p class="duzo">727 144 451</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════════ ZABIEGI ═════════════ -->
+<div class="widok" id="v-zabiegi" hidden>
+  <div class="strona">
+    <div class="strona-glowa">
+      <svg class="ornament wejscie" viewBox="0 0 120 160" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path class="r" d="M52 22V44A44 44 0 1 0 68 44V22"/>
+        <rect class="r" x="48" y="8" width="24" height="14" rx="3"/>
+        <path class="r" style="--i:2" d="M22 98q9.5-6 19 0t19 0t19 0t19 0"/>
+        <path class="r" style="--i:3" d="M30 86a32 32 0 0 1 12-22"/>
+        <circle class="r" style="--i:4" cx="48" cy="114" r="3"/><circle class="r" style="--i:5" cx="66" cy="106" r="2.2"/><circle class="r" style="--i:6" cx="58" cy="120" r="1.8"/>
+        <use href="#gw4" x="88" y="16" width="14" height="14"/>
+        <use href="#gw4" x="8" y="40" width="9" height="9"/>
+      </svg>
+      <div class="wejscie" style="--i:1">
+        <p class="etykieta">Zabiegi</p>
+        <h2>Zabiegi i ceny</h2>
+        <p class="wstep">Ceny z cennika gabinetu. Na każdy zabieg trzeba się wcześniej umówić.</p>
+        <div class="skoki">
+          <button class="skok" type="button" data-skok="k-1">Fotel Ceragem</button>
+          <button class="skok" type="button" data-skok="k-2">Stopy</button>
+          <button class="skok" type="button" data-skok="k-3">Twarz i skóra</button>
+          <button class="skok" type="button" data-skok="k-4">Brwi, rzęsy, paznokcie</button>
+          <button class="skok" type="button" data-skok="k-5">Rytuały</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="krag wejscie" style="--i:2" id="k-1">
+      <div class="krag-glowa">
+        <span class="krag-num">I</span>
+        <svg class="krag-ico" aria-hidden="true"><use href="#i-kregoslup"/></svg>
+        <div><h3>Fotel Ceragem</h3><p>Fotel koreańskiej firmy Ceragem skanuje kręgosłup i dobiera masaż do twojej budowy. Grzeje i gra muzykę.</p></div>
+      </div>
+      <ul>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Masaż testowy</span><i class="kropki"></i><span class="cena">30 zł</span></div><p class="opis">15 minut · skan kręgosłupa i dobranie programu</p></li>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Masaż wybranej partii ciała</span><i class="kropki"></i><span class="cena">50 zł</span></div><p class="opis">20 minut · szyja i ramiona, plecy i talia albo talia i miednica</p></li>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Masaż całego ciała</span><i class="kropki"></i><span class="cena">75 zł</span></div><p class="opis">30 minut · program do wyboru: vitality, relax, energy, study, full body</p></li>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Masaż na poprawę snu</span><i class="kropki"></i><span class="cena">140 zł</span></div><p class="opis">90 minut · najdłuższy program, wyciszający przed nocą</p></li>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Drenaż limfatyczny nóg</span><i class="kropki"></i><span class="cena">+20 zł</span></div><p class="opis">dopłata do dowolnego masażu na fotelu, płatna na miejscu</p></li>
+      </ul>
+      <p class="dopisek">Do każdego masażu na fotelu dochodzi masaż brzucha.</p>
+    </section>
+
+    <section class="krag wejscie" style="--i:3" id="k-2">
+      <div class="krag-glowa">
+        <span class="krag-num">II</span>
+        <svg class="krag-ico" aria-hidden="true"><use href="#i-stopa"/></svg>
+        <div><h3>Stopy</h3><p>Dla tych, które cały dzień spędzają na nogach.</p></div>
+      </div>
+      <ul>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Relaksacyjny masaż stóp z oliwką</span><i class="kropki"></i><span class="cena">80 zł</span></div><p class="opis">20 minut · rozluźnienie mięśni stóp i poprawa krążenia</p></li>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Masaż stóp z elementami podologii</span><i class="kropki"></i><span class="cena">cena po rozmowie</span></div><p class="opis">30 albo 60 minut · masaż połączony z podstawową pielęgnacją i opracowaniem skóry stóp</p></li>
+      </ul>
+    </section>
+
+    <section class="krag wejscie" style="--i:4" id="k-3">
+      <div class="krag-glowa">
+        <span class="krag-num">III</span>
+        <svg class="krag-ico" aria-hidden="true"><use href="#i-ziola"/></svg>
+        <div><h3>Twarz i skóra</h3><p>Zioła, borowina i mikronakłuwanie.</p></div>
+      </div>
+      <ul>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Peeling ziołowy</span><i class="kropki"></i><span class="cena">200 zł</span></div><p class="opis">90 minut</p></li>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Maseczka borowinowa</span><i class="kropki"></i><span class="cena">120 zł</span></div><p class="opis">90 minut</p></li>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Dermapen, szyja i dekolt</span><i class="kropki"></i><span class="cena">700 zł</span></div><p class="opis">90 minut · mikronakłuwanie</p></li>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Dermapen, twarz, szyja i dekolt</span><i class="kropki"></i><span class="cena">900 zł</span></div><p class="opis">120 minut · mikronakłuwanie, pełny obszar</p></li>
+      </ul>
+    </section>
+
+    <section class="krag wejscie" style="--i:5" id="k-4">
+      <div class="krag-glowa">
+        <span class="krag-num">IV</span>
+        <svg class="krag-ico" aria-hidden="true"><use href="#i-oko"/></svg>
+        <div><h3>Brwi, rzęsy, paznokcie</h3><p>Spojrzenie i dłonie, które rzucają uroki.</p></div>
+      </div>
+      <ul>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Henna żelowa brwi</span><i class="kropki"></i><span class="cena">40 zł</span></div><p class="opis">45 minut</p></li>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Henna pudrowa brwi</span><i class="kropki"></i><span class="cena">40 zł</span></div><p class="opis">45 minut</p></li>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Henna pudrowa brwi i rzęs</span><i class="kropki"></i><span class="cena">80 zł</span></div><p class="opis">45 minut</p></li>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Farbka i regulacja brwi</span><i class="kropki"></i><span class="cena">100 zł</span></div><p class="opis">45 minut</p></li>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Laminacja paznokci</span><i class="kropki"></i><span class="cena">120 zł</span></div><p class="opis">45 minut · regeneracja i odżywienie płytki</p></li>
+      </ul>
+    </section>
+
+    <section class="krag wejscie" style="--i:6" id="k-5">
+      <div class="krag-glowa">
+        <span class="krag-num">V</span>
+        <svg class="krag-ico" aria-hidden="true"><use href="#i-swieca"/></svg>
+        <div><h3>Rytuały</h3><p>Ogień, światło i prąd. Wszystko na leżąco.</p></div>
+      </div>
+      <ul>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Świecowanie uszu metodą Indian Hopi</span><i class="kropki"></i><span class="cena">50 zł</span></div><p class="opis">30 minut</p></li>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Naświetlanie lampą na podczerwień</span><i class="kropki"></i><span class="cena">40 zł</span></div><p class="opis">15 minut</p></li>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Trening EMS na leżąco</span><i class="kropki"></i><span class="cena">110 zł</span></div><p class="opis">30 minut · jedna sesja</p></li>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Trening EMS, pakiet 6 sesji</span><i class="kropki"></i><span class="cena">630 zł</span></div><p class="opis">6 × 30 minut</p></li>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Trening EMS, pakiet 10 sesji</span><i class="kropki"></i><span class="cena">1000 zł</span></div><p class="opis">10 × 30 minut</p></li>
+        <li class="poz"><div class="wiersz"><span class="nazwa">Trening EMS, pakiet 12 sesji</span><i class="kropki"></i><span class="cena">1100 zł</span></div><p class="opis">12 × 30 minut</p></li>
+      </ul>
+    </section>
+  </div>
+</div>
+
+<!-- ═════════════ OPINIE ═════════════ -->
+<div class="widok" id="v-opinie" hidden>
+  <div class="strona">
+    <div class="strona-glowa">
+      <svg class="ornament wejscie" viewBox="0 0 140 170" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle class="r" cx="70" cy="64" r="52"/>
+        <path class="r" style="--i:2" d="M38 42a40 40 0 0 1 22-17"/>
+        <path class="r" style="--i:3" d="M42 112c8 8 48 8 56 0"/>
+        <path class="r" style="--i:4" d="M38 122h64l8 22H30Z"/>
+        <path class="r" style="--i:5" d="M24 150h92"/>
+        <use href="#gw4" x="58" y="50" width="22" height="22"/>
+        <use href="#gw4" x="84" y="34" width="9" height="9"/>
+        <use href="#gw4" x="44" y="76" width="8" height="8"/>
+      </svg>
+      <div class="wejscie" style="--i:1">
+        <p class="etykieta">Opinie</p>
+        <h2>Co mówią klientki</h2>
+        <div class="oceny">
+          <div><b>5,0</b><span>Google · 8 opinii</span></div>
+          <div><b>4,8</b><span>Groupon · 33 opinie</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="glosy">
+      <figure class="glos wejscie" style="--i:2">
+        <p>Upominek w postaci vouchera okazał się doskonałym wyborem. Mąż jest zadowolony z zabiegu, który był bardzo relaksujący, a także profesjonalnym i miłym podejściem pani masażystki.</p>
+        <footer><b>Milena</b><span>Groupon</span></footer>
+      </figure>
+      <figure class="glos wejscie" style="--i:3">
+        <p>Było wspaniale, umówiłam już kolejny termin ♥</p>
+        <footer><b>Asia</b><span>Groupon</span></footer>
+      </figure>
+      <figure class="glos wejscie" style="--i:4">
+        <p>Super atmosfera, bardzo przyjemny masaż.</p>
+        <footer><b>Monika</b><span>Groupon</span></footer>
+      </figure>
+      <figure class="glos wejscie" style="--i:5">
+        <p>Polecam 🙂</p>
+        <footer><b>Małgorzata</b><span>Groupon</span></footer>
+      </figure>
+    </div>
+
+    <p class="przypis wejscie" style="--i:6">Opinie przepisane z Grouponu. Więcej przeczytasz w <a href="https://maps.google.com/?q=Dotyk+Wied%C5%BAmy+Konarskiego+9+Kielce" target="_blank" rel="noopener">Google</a> i na <a href="https://www.facebook.com/profile.php?id=61574734842850" target="_blank" rel="noopener">Facebooku</a>.</p>
+  </div>
+</div>
+
+<!-- ═════════════ WIZYTA ═════════════ -->
+<div class="widok" id="v-wizyta" hidden>
+  <div class="strona">
+    <div class="strona-glowa">
+      <svg class="ornament wejscie" viewBox="0 0 70 170" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M35 20C45 34 45 48 35 58C25 48 25 34 35 20Z" fill="currentColor" stroke="none"/>
+        <path class="r" d="M35 58v10"/>
+        <rect class="r" style="--i:2" x="20" y="68" width="30" height="86" rx="2"/>
+        <path class="r" style="--i:3" d="M25 68v10a2.2 2.2 0 0 0 4.4 0V68M40 68v15a2.2 2.2 0 0 0 4.4 0V68"/>
+        <path class="r" style="--i:4" d="M6 154h58M11 154q24 11 48 0"/>
+      </svg>
+      <div class="wejscie" style="--i:1">
+        <p class="etykieta">Wizyta</p>
+        <h2>Umów wizytę</h2>
+        <p class="wstep">Wybierz zabieg i termin, a dostaniesz gotową wiadomość. Wyślij ją na Facebooku albo Instagramie, albo po prostu zadzwoń.</p>
+      </div>
+    </div>
+
+    <div class="zwoj wejscie" style="--i:2">
+      <div class="pole">
+        <label class="etykieta" for="sel-zabieg">Zabieg</label>
+        <select id="sel-zabieg">
+          <option data-czas="15 minut" data-cena="30">Masaż testowy (fotel Ceragem)</option>
+          <option data-czas="20 minut" data-cena="50">Masaż wybranej partii ciała (fotel Ceragem)</option>
+          <option data-czas="30 minut" data-cena="75" selected>Masaż całego ciała (fotel Ceragem)</option>
+          <option data-czas="90 minut" data-cena="140">Masaż na poprawę snu (fotel Ceragem)</option>
+          <option data-czas="20 minut" data-cena="80">Relaksacyjny masaż stóp z oliwką</option>
+          <option data-czas="30 albo 60 minut" data-cena="">Masaż stóp z elementami podologii</option>
+          <option data-czas="90 minut" data-cena="200">Peeling ziołowy</option>
+          <option data-czas="90 minut" data-cena="120">Maseczka borowinowa</option>
+          <option data-czas="90 minut" data-cena="700">Dermapen, szyja i dekolt</option>
+          <option data-czas="120 minut" data-cena="900">Dermapen, twarz, szyja i dekolt</option>
+          <option data-czas="45 minut" data-cena="40">Henna żelowa brwi</option>
+          <option data-czas="45 minut" data-cena="40">Henna pudrowa brwi</option>
+          <option data-czas="45 minut" data-cena="80">Henna pudrowa brwi i rzęs</option>
+          <option data-czas="45 minut" data-cena="100">Farbka i regulacja brwi</option>
+          <option data-czas="45 minut" data-cena="120">Laminacja paznokci</option>
+          <option data-czas="30 minut" data-cena="50">Świecowanie uszu metodą Indian Hopi</option>
+          <option data-czas="15 minut" data-cena="40">Naświetlanie lampą na podczerwień</option>
+          <option data-czas="30 minut" data-cena="110">Trening EMS na leżąco</option>
+        </select>
+      </div>
+      <div class="pole">
+        <label class="etykieta" for="sel-kiedy">Kiedy pasuje</label>
+        <select id="sel-kiedy">
+          <option>w tym tygodniu, przed południem</option>
+          <option selected>w tym tygodniu, po południu</option>
+          <option>w przyszłym tygodniu, przed południem</option>
+          <option>w przyszłym tygodniu, po południu</option>
+          <option>w dowolnym wolnym terminie</option>
+        </select>
+      </div>
+      <div class="pole">
+        <label class="etykieta" for="inp-imie">Imię</label>
+        <input type="text" id="inp-imie" placeholder="Anna" autocomplete="given-name">
+      </div>
+      <p class="zapis" id="zapis"></p>
+      <div class="zwoj-stopka">
+        <button class="btn btn-zloty" type="button" id="btn-kopiuj">Skopiuj wiadomość</button>
+        <a class="btn" href="tel:+48727144451">Zadzwoń</a>
+        <span class="gotowe" id="gotowe" hidden>Skopiowano</span>
+      </div>
+    </div>
+    <p class="inne-drogi wejscie" style="--i:3">Wiadomość wyślesz na <a href="https://www.facebook.com/profile.php?id=61574734842850" target="_blank" rel="noopener">Facebooku</a> albo na <a href="https://www.instagram.com/dotykwiedzmy/" target="_blank" rel="noopener">Instagramie @dotykwiedzmy</a>. Telefon: 727 144 451.</p>
+  </div>
+</div>
+
+<!-- ═════════════ KONTAKT ═════════════ -->
+<div class="widok" id="v-kontakt" hidden>
+  <div class="strona">
+    <div class="strona-glowa">
+      <svg class="ornament wejscie" viewBox="0 0 130 110" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path class="r" d="M10 90L34 58L60 70L88 34L118 48"/>
+        <use href="#gw4" x="3" y="83" width="14" height="14"/>
+        <use href="#gw4" x="28" y="52" width="12" height="12"/>
+        <use href="#gw4" x="53" y="63" width="14" height="14"/>
+        <use href="#gw4" x="79" y="25" width="18" height="18"/>
+        <use href="#gw4" x="112" y="42" width="12" height="12"/>
+        <circle class="r" style="--i:3" cx="104" cy="16" r="9"/>
+      </svg>
+      <div class="wejscie" style="--i:1">
+        <p class="etykieta">Kontakt</p>
+        <h2>Jak trafić</h2>
+        <p class="stan" data-stan style="margin-top: 14px"><i></i><span></span></p>
+      </div>
+    </div>
+
+    <div class="dane wejscie" style="--i:2">
+      <div class="dana">
+        <span class="etykieta">Telefon</span>
+        <div><p class="co duze">727 144 451</p><p class="pod">Jeśli nie odbieram, jestem w trakcie zabiegu. Oddzwonię.</p></div>
+      </div>
+      <div class="dana">
+        <span class="etykieta">Adres</span>
+        <div><p class="co">ks. Stanisława Konarskiego 9, pawilon<br>25-340 Kielce</p><p class="pod"><a href="https://maps.google.com/?q=Dotyk+Wied%C5%BAmy+Konarskiego+9+Kielce" target="_blank" rel="noopener">Otwórz w Mapach Google</a></p></div>
+      </div>
+      <div class="dana">
+        <span class="etykieta">Godziny</span>
+        <div class="godziny" id="godziny">
+          <div data-dzien="1"><span>Poniedziałek</span><span>11:00 do 17:00</span></div>
+          <div data-dzien="2"><span>Wtorek</span><span>11:00 do 17:00</span></div>
+          <div data-dzien="3"><span>Środa</span><span>11:00 do 17:00</span></div>
+          <div data-dzien="4"><span>Czwartek</span><span>11:00 do 17:00</span></div>
+          <div data-dzien="5"><span>Piątek</span><span>11:00 do 17:00</span></div>
+          <div data-dzien="6" class="wolne"><span>Sobota</span><span>zamknięte</span></div>
+          <div data-dzien="0" class="wolne"><span>Niedziela</span><span>zamknięte</span></div>
+        </div>
+      </div>
+      <div class="dana">
+        <span class="etykieta">Media</span>
+        <div><p class="co"><a href="https://www.facebook.com/profile.php?id=61574734842850" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.instagram.com/dotykwiedzmy/" target="_blank" rel="noopener">Instagram @dotykwiedzmy</a></p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="stopa">
+  <div class="stopa-in">
+    <div class="stopa-znak">
+      <img src="assets/znak.png" alt="">
+      <div><b>Dotyk Wiedźmy</b><span>Zabiegi bez ryzyka przemiany w żabę.</span></div>
+    </div>
+    <p class="stopa-dane">Salon kosmetyki i masażu · ks. Stanisława Konarskiego 9, pawilon, Kielce · 727 144 451</p>
+    <div class="stopa-linki">
+      <a href="https://www.facebook.com/profile.php?id=61574734842850" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.instagram.com/dotykwiedzmy/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+    <p class="stopa-prawa">Projekt demonstracyjny przygotowany do akceptacji. Prawa do projektu i kodu strony należą do wykonawcy do czasu zakupu. Kopiowanie i publikowanie bez zgody wykonawcy jest zabronione.</p>
+  </div>
+</footer>
+
+<div class="demo-pasek" role="note">
+  <span class="dlugo">Wersja demonstracyjna · prawa do projektu należą do wykonawcy do czasu zakupu</span>
+  <span class="krotko">Wersja demonstracyjna</span>
+</div>
+
+<!-- wzór rewersu karty -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="rewers-wzor">
+      <rect x="7" y="7" width="86" height="136" rx="3" opacity=".55"/>
+      <circle cx="50" cy="75" r="27" stroke-dasharray="1 3.2" opacity=".85"/>
+      <circle cx="50" cy="75" r="20" opacity=".5"/>
+      <path d="M50 44v-7M71.9 53.1l5-5M81 75h7M71.9 96.9l5 5M50 106v7M28.1 96.9l-5 5M19 75h-7M28.1 53.1l-5-5"/>
+      <use href="#i-ksiezyc" x="38" y="63" width="24" height="24"/>
+      <use href="#gw4" x="13" y="13" width="9" height="9"/>
+      <use href="#gw4" x="78" y="13" width="9" height="9"/>
+      <use href="#gw4" x="13" y="128" width="9" height="9"/>
+      <use href="#gw4" x="78" y="128" width="9" height="9"/>
+      <path d="M38 22h24M38 128h24" opacity=".5"/>
+    </g>
+  </defs>
+</svg>
+
+<script>
+(function () {
+  var cisza = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+
+  /* rysowane kontury */
+
+  /* ———————— podstrony ———————— */
+  var widoki = $$('.widok');
+  var menu = $$('.menu button');
+  var aktualny = 'start';
+
+  function pokaz(id, opcje) {
+    opcje = opcje || {};
+    if (!document.getElementById('v-' + id)) id = 'start';
+    widoki.forEach(function (w) { w.hidden = w.id !== 'v-' + id; w.classList.remove('wchodzi'); });
+    menu.forEach(function (b) {
+      if (b.dataset.view === id) b.setAttribute('aria-current', 'page');
+      else b.removeAttribute('aria-current');
+    });
+    var el = document.getElementById('v-' + id);
+    $$('.r', el).forEach(function (r) {
+      try { var L = r.getTotalLength(); if (L > 0) r.style.setProperty('--L', (L + 1).toFixed(1)); } catch (e) { /* bez rysowania */ }
+    });
+    if (opcje.anim !== false && !cisza) { void el.offsetWidth; el.classList.add('wchodzi'); }
+    aktualny = id;
+    try { history.replaceState(null, '', '#' + id); } catch (e) { /* nic */ }
+    if (opcje.przewin !== false) {
+      if (opcje.cel) {
+        var cel = document.getElementById(opcje.cel);
+        window.scrollTo(0, 0);
+        if (cel) setTimeout(function () {
+          var y = cel.getBoundingClientRect().top + window.pageYOffset - 84;
+          window.scrollTo({ top: y, behavior: cisza ? 'auto' : 'smooth' });
+        }, 60);
+      } else {
+        window.scrollTo(0, 0);
+      }
+    }
+    if (id === 'start') { zasiej(); }
+    sterujPetla();
+  }
+
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-view]');
+    if (t) {
+      e.preventDefault();
+      pokaz(t.dataset.view, { cel: t.dataset.cel });
+      if (t.dataset.wybierz) wybierzZabieg(t.dataset.wybierz);
+      return;
+    }
+    var s = e.target.closest('[data-skok]');
+    if (s) {
+      var k = document.getElementById(s.dataset.skok);
+      if (k) window.scrollTo({ top: k.getBoundingClientRect().top + window.pageYOffset - 84, behavior: cisza ? 'auto' : 'smooth' });
+    }
+  });
+
+  /* ———————— niebo i złoty pył ———————— */
+  var hero = $('.hero');
+  var niebo = $('#niebo'), pyl = $('#pyl');
+  var nc = niebo.getContext('2d'), pc = pyl.getContext('2d');
+  var W = 0, H = 0, gwiazdy = [], drobiny = [], spad = null, nastepnySpad = 0;
+  var ZLOTO = '214,190,132';
+
+  function gwiazdka(ctx, x, y, r) {
+    ctx.beginPath();
+    ctx.moveTo(x, y - r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.quadraticCurveTo(x, y, x, y + r);
+    ctx.quadraticCurveTo(x, y, x - r, y);
+    ctx.quadraticCurveTo(x, y, x, y - r);
+    ctx.fill();
+  }
+
+  function zasiej() {
+    if (!hero.offsetWidth) return;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = hero.clientWidth; H = hero.clientHeight;
+    [niebo, pyl].forEach(function (c) {
+      c.width = W * dpr; c.height = H * dpr;
+      c.getContext('2d').setTransform(dpr, 0, 0, dpr, 0, 0);
+    });
+    gwiazdy = [];
+    var ile = Math.round(W * H / 5200);
+    for (var i = 0; i < ile; i++) {
+      var duza = Math.random() < .14;
+      gwiazdy.push({
+        x: Math.random() * W, y: Math.random() * H,
+        r: duza ? 2.6 + Math.random() * 4.2 : .45 + Math.random() * 1.05,
+        duza: duza,
+        f: Math.random() * Math.PI * 2,
+        t: .0005 + Math.random() * .0014
+      });
+    }
+    rysujNiebo(performance.now());
+  }
+
+  function rysujNiebo(t) {
+    nc.clearRect(0, 0, W, H);
+    nc.fillStyle = 'rgb(' + ZLOTO + ')';
+    for (var i = 0; i < gwiazdy.length; i++) {
+      var g = gwiazdy[i];
+      var mig = cisza ? .6 : .5 + .5 * Math.sin(t * g.t + g.f);
+      if (g.duza) {
+        nc.globalAlpha = .25 + .6 * mig;
+        gwiazdka(nc, g.x, g.y, g.r * (.7 + .3 * mig));
+      } else {
+        nc.globalAlpha = .18 + .5 * mig;
+        nc.beginPath(); nc.arc(g.x, g.y, g.r, 0, Math.PI * 2); nc.fill();
+      }
+    }
+    if (spad) {
+      var dl = 130;
+      var gr = nc.createLinearGradient(spad.x, spad.y, spad.x - spad.vx * dl / 10, spad.y - spad.vy * dl / 10);
+      gr.addColorStop(0, 'rgba(' + ZLOTO + ',' + (.9 * spad.z).toFixed(3) + ')');
+      gr.addColorStop(1, 'rgba(' + ZLOTO + ',0)');
+      nc.globalAlpha = 1;
+      nc.strokeStyle = gr; nc.lineWidth = 1.4; nc.lineCap = 'round';
+      nc.beginPath(); nc.moveTo(spad.x, spad.y); nc.lineTo(spad.x - spad.vx * dl / 10, spad.y - spad.vy * dl / 10); nc.stroke();
+    }
+    nc.globalAlpha = 1;
+  }
+
+  function sypnij(x, y, ile, sila) {
+    for (var i = 0; i < ile && drobiny.length < 220; i++) {
+      var a = Math.random() * Math.PI * 2, v = Math.random() * sila;
+      drobiny.push({
+        x: x, y: y,
+        vx: Math.cos(a) * v, vy: Math.sin(a) * v - .4,
+        r: Math.random() < .35 ? 2.2 + Math.random() * 2.6 : .7 + Math.random() * 1.1,
+        z: 1, gw: Math.random() < .35
+      });
+    }
+  }
+
+  function rysujPyl() {
+    pc.clearRect(0, 0, W, H);
+    pc.fillStyle = 'rgb(' + ZLOTO + ')';
+    for (var i = drobiny.length - 1; i >= 0; i--) {
+      var d = drobiny[i];
+      d.x += d.vx; d.y += d.vy; d.vy += .018; d.vx *= .985; d.z -= .014;
+      if (d.z <= 0) { drobiny.splice(i, 1); continue; }
+      pc.globalAlpha = d.z;
+      if (d.gw) gwiazdka(pc, d.x, d.y, d.r);
+      else { pc.beginPath(); pc.arc(d.x, d.y, d.r, 0, Math.PI * 2); pc.fill(); }
+    }
+    pc.globalAlpha = 1;
+  }
+
+  var raf = 0;
+  function klatka(t) {
+    if (!spad && t > nastepnySpad) {
+      spad = { x: W * (.35 + Math.random() * .6), y: H * Math.random() * .3, vx: -(6 + Math.random() * 3), vy: 2.6 + Math.random() * 1.6, z: 1 };
+    }
+    if (spad) {
+      spad.x += spad.vx; spad.y += spad.vy; spad.z -= .016;
+      if (spad.z <= 0 || spad.x < -100 || spad.y > H) { spad = null; nastepnySpad = t + 6000 + Math.random() * 7000; }
+    }
+    rysujNiebo(t);
+    rysujPyl();
+    raf = requestAnimationFrame(klatka);
+  }
+  function sterujPetla() {
+    var ma = aktualny === 'start' && !document.hidden && !cisza;
+    if (ma && !raf) { nastepnySpad = performance.now() + 2500; raf = requestAnimationFrame(klatka); }
+    if (!ma && raf) { cancelAnimationFrame(raf); raf = 0; }
+  }
+  document.addEventListener('visibilitychange', sterujPetla);
+
+  var czekaj;
+  window.addEventListener('resize', function () {
+    clearTimeout(czekaj);
+    czekaj = setTimeout(function () { if (aktualny === 'start') zasiej(); }, 160);
+  });
+
+  hero.addEventListener('pointermove', function (e) {
+    if (cisza) return;
+    var r = hero.getBoundingClientRect();
+    sypnij(e.clientX - r.left, e.clientY - r.top, 2, 1.1);
+  }, { passive: true });
+  hero.addEventListener('pointerdown', function (e) {
+    if (cisza) return;
+    var r = hero.getBoundingClientRect();
+    sypnij(e.clientX - r.left, e.clientY - r.top, 18, 3.2);
+  });
+
+  /* ———————— paralaksa i oko ———————— */
+  var orbita = $('.orbita');
+  var zrenica = $('#oko-zrenica'), bialko = $('#oko-bialko'), oko = $('#oko');
+  var ostatniRuch = 0;
+
+  function patrz(cx, cy) {
+    var r = bialko.getBoundingClientRect();
+    if (!r.width) return;
+    var dx = cx - (r.left + r.width / 2), dy = cy - (r.top + r.height / 2);
+    var d = Math.hypot(dx, dy) || 1, k = Math.min(d / 140, 1);
+    zrenica.style.transform = 'translate(' + (dx / d * k * 10).toFixed(2) + 'px,' + (dy / d * k * 5).toFixed(2) + 'px)';
+  }
+
+  window.addEventListener('pointermove', function (e) {
+    if (aktualny !== 'start' || cisza) return;
+    orbita.style.setProperty('--px', ((e.clientX / window.innerWidth - .5) * 40).toFixed(1));
+    orbita.style.setProperty('--py', ((e.clientY / window.innerHeight - .5) * 30).toFixed(1));
+    patrz(e.clientX, e.clientY);
+    ostatniRuch = performance.now();
+  }, { passive: true });
+
+  if (!cisza) {
+    setInterval(function () {
+      if (aktualny !== 'start' || performance.now() - ostatniRuch < 3500) return;
+      var x = (Math.random() * 2 - 1) * 9, y = (Math.random() * 2 - 1) * 4;
+      zrenica.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
+    }, 2300);
+    (function mrugnij() {
+      oko.classList.add('mrug');
+      setTimeout(function () { oko.classList.remove('mrug'); }, 270);
+      setTimeout(mrugnij, 2600 + Math.random() * 4200);
+    })();
+  }
+
+  /* ———————— żaba ———————— */
+  var zaba = $('.zaba');
+  zaba.addEventListener('click', function () {
+    zaba.classList.remove('skok'); void zaba.offsetWidth; zaba.classList.add('skok');
+    zaba.classList.add('mowi');
+    clearTimeout(zaba._t);
+    zaba._t = setTimeout(function () { zaba.classList.remove('mowi'); }, 3200);
+  });
+  setTimeout(function () {
+    if (aktualny !== 'start') return;
+    zaba.classList.add('mowi');
+    zaba._t = setTimeout(function () { zaba.classList.remove('mowi'); }, 3800);
+  }, 5500);
+
+  /* ———————— wyrocznia ———————— */
+  var TALIA = [
+    { n: 'XVIII', k: 'Sen', ico: 'ksiezyc', t: 'Masaż na poprawę snu', v: 'Masaż na poprawę snu (fotel Ceragem)', czas: '90 minut', cena: '140 zł',
+      p: 'Widzę w twojej przyszłości noc bez liczenia owiec. Owce będą rozczarowane, ty nie.' },
+    { n: 'IV', k: 'Fotel', ico: 'kregoslup', t: 'Masaż całego ciała na fotelu Ceragem', v: 'Masaż całego ciała (fotel Ceragem)', czas: '30 minut', cena: '75 zł',
+      p: 'Karty mówią, że twój kręgosłup ma ci coś do powiedzenia. Fotel najpierw go zeskanuje, a potem wysłucha.' },
+    { n: 'VII', k: 'Stopy', ico: 'stopa', t: 'Relaksacyjny masaż stóp z oliwką', v: 'Relaksacyjny masaż stóp z oliwką', czas: '20 minut', cena: '80 zł',
+      p: 'Przed tobą długa droga. Zanim w nią ruszysz, twoje stopy proszą o dwadzieścia minut urlopu.' },
+    { n: 'II', k: 'Barki', ico: 'gwiazda', t: 'Masaż wybranej partii ciała', v: 'Masaż wybranej partii ciała (fotel Ceragem)', czas: '20 minut', cena: '50 zł',
+      p: 'Twoje barki dźwigają za dużo. Zdejmiemy ten ciężar, przynajmniej ten fizyczny.' },
+    { n: 'XVII', k: 'Zioła', ico: 'ziola', t: 'Peeling ziołowy', v: 'Peeling ziołowy', czas: '90 minut', cena: '200 zł',
+      p: 'Zioła, ciepło i półtorej godziny spokoju. Wyjdziesz gładsza niż wymówki twojego byłego.' },
+    { n: 'XII', k: 'Borowina', ico: 'eliksir', t: 'Maseczka borowinowa', v: 'Maseczka borowinowa', czas: '90 minut', cena: '120 zł',
+      p: 'Błoto, ale szlachetne. Nawet żaby patrzą z zazdrością.' },
+    { n: 'XXI', k: 'Świeca', ico: 'swieca', t: 'Świecowanie uszu metodą Indian Hopi', v: 'Świecowanie uszu metodą Indian Hopi', czas: '30 minut', cena: '50 zł',
+      p: 'Świeca płonie, świat cichnie. Pół godziny, w którym nikt niczego od ciebie nie chce.' },
+    { n: 'III', k: 'Spojrzenie', ico: 'oko', t: 'Henna pudrowa brwi i rzęs', v: 'Henna pudrowa brwi i rzęs', czas: '45 minut', cena: '80 zł',
+      p: 'Spojrzenie, które rzuca uroki. Legalnie i bez kociołka.' },
+    { n: '0', k: 'Próba', ico: 'kula', t: 'Masaż testowy na fotelu Ceragem', v: 'Masaż testowy (fotel Ceragem)', czas: '15 minut', cena: '30 zł',
+      p: 'Ostrożna dusza. Kwadrans próby wystarczy, resztę karty zostawiają tobie.' },
+    { n: 'VI', k: 'Dłonie', ico: 'gwiazda', t: 'Laminacja paznokci', v: 'Laminacja paznokci', czas: '45 minut', cena: '120 zł',
+      p: 'Dłonie wiedźmy zawsze wyglądają nienagannie. Twoje też mogą.' },
+    { n: 'IX', k: 'Światło', ico: 'kula', t: 'Naświetlanie lampą na podczerwień', v: 'Naświetlanie lampą na podczerwień', czas: '15 minut', cena: '40 zł',
+      p: 'Kwadrans ciepłego światła. Pustelnik z karty IX też by nie odmówił.' }
+  ];
+  var talia = $('#talia'), karty = $$('.karta', talia);
+  var panel = $('#przepowiednia');
+  var pEt = $('#p-etykieta'), pTyt = $('#p-tytul'), pTek = $('#p-tekst'), pMeta = $('#p-meta'), pAkc = $('#p-akcje'), pUmow = $('#p-umow');
+  var DOMYSLNE = { et: pEt.textContent, tyt: pTyt.textContent, tek: pTek.textContent };
+  var rozdane = [];
+
+  function rozdaj() {
+    var kopia = TALIA.slice();
+    for (var i = kopia.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var tmp = kopia[i]; kopia[i] = kopia[j]; kopia[j] = tmp; }
+    rozdane = kopia.slice(0, 3);
+    karty.forEach(function (k, i) {
+      var d = rozdane[i];
+      $('.aw-num', k).textContent = d.n;
+      $('.aw-ico use', k).setAttribute('href', '#i-' + d.ico);
+      $('.aw-naz', k).textContent = d.k;
+    });
+  }
+  function odswiezPanel() { panel.classList.remove('swieza'); void panel.offsetWidth; if (!cisza) panel.classList.add('swieza'); }
+
+  function odkryj(i) {
+    if (talia.classList.contains('po-wyborze')) return;
+    talia.classList.add('po-wyborze');
+    karty.forEach(function (k, j) {
+      k.classList.toggle('odkryta', j === i);
+      k.classList.toggle('zgaszona', j !== i);
+      k.setAttribute('aria-pressed', j === i ? 'true' : 'false');
+      k.style.removeProperty('--rx'); k.style.removeProperty('--ry');
+    });
+    var d = rozdane[i];
+    pEt.textContent = 'Karta ' + d.n;
+    pTyt.textContent = d.t;
+    pTek.textContent = d.p;
+    pMeta.textContent = d.czas + ' · ' + d.cena;
+    pMeta.hidden = false; pAkc.hidden = false;
+    pUmow.dataset.wybierz = d.v;
+    odswiezPanel();
+  }
+
+  function potasuj() {
+    karty.forEach(function (k) { k.classList.remove('odkryta', 'zgaszona'); k.setAttribute('aria-pressed', 'false'); });
+    talia.classList.remove('po-wyborze');
+    pEt.textContent = DOMYSLNE.et; pTyt.textContent = DOMYSLNE.tyt; pTek.textContent = DOMYSLNE.tek;
+    pMeta.hidden = true; pAkc.hidden = true;
+    odswiezPanel();
+    setTimeout(function () {
+      rozdaj();
+      if (!cisza) {
+        talia.classList.add('tasuje');
+        setTimeout(function () { talia.classList.remove('tasuje'); }, 720);
+      }
+    }, cisza ? 0 : 700);
+  }
+
+  karty.forEach(function (k, i) {
+    k.addEventListener('click', function () { odkryj(i); });
+    k.addEventListener('pointermove', function (e) {
+      if (cisza || k.classList.contains('odkryta') || talia.classList.contains('po-wyborze')) return;
+      var r = k.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      k.style.setProperty('--rx', (-y * 16).toFixed(1) + 'deg');
+      k.style.setProperty('--ry', (x * 18).toFixed(1) + 'deg');
+    });
+    k.addEventListener('pointerleave', function () { k.style.removeProperty('--rx'); k.style.removeProperty('--ry'); });
+  });
+  $('#p-tasuj').addEventListener('click', potasuj);
+  rozdaj();
+
+  /* ———————— wiadomość z wizytą ———————— */
+  var sel = $('#sel-zabieg'), kiedy = $('#sel-kiedy'), imie = $('#inp-imie'), zapis = $('#zapis'), gotowe = $('#gotowe');
+
+  function tekst() {
+    var o = sel.options[sel.selectedIndex];
+    var kto = imie.value.trim();
+    var meta = o.dataset.cena ? o.dataset.czas + ', ' + o.dataset.cena + ' zł' : o.dataset.czas;
+    return 'Dzień dobry, chciałabym umówić się na: ' + o.text + ' (' + meta + '). Pasuje mi ' + kiedy.value + '.' +
+      (kto ? ' Pozdrawiam, ' + kto + '.' : '');
+  }
+  function odswiez() {
+    var o = sel.options[sel.selectedIndex];
+    var naglowek = o.dataset.czas + (o.dataset.cena ? ' · ' + o.dataset.cena + ' zł' : ' · cena po rozmowie');
+    zapis.innerHTML = '';
+    var b = document.createElement('b'); b.textContent = naglowek;
+    zapis.appendChild(b);
+    zapis.appendChild(document.createTextNode(tekst()));
+    gotowe.hidden = true;
+  }
+  function wybierzZabieg(nazwa) {
+    for (var i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].text === nazwa) { sel.selectedIndex = i; break; }
+    }
+    odswiez();
+  }
+  [sel, kiedy].forEach(function (el) { el.addEventListener('change', odswiez); });
+  imie.addEventListener('input', odswiez);
+  odswiez();
+
+  $('#btn-kopiuj').addEventListener('click', function () {
+    var w = tekst();
+    function ok() { gotowe.hidden = false; }
+    function zapas() {
+      var ta = document.createElement('textarea');
+      ta.value = w; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); ok(); } catch (e) { /* nic */ }
+      document.body.removeChild(ta);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(w).then(ok, zapas);
+    else zapas();
+  });
+
+  /* ———————— czy teraz otwarte (czas w Kielcach) ———————— */
+  function stan() {
+    var teraz;
+    try { teraz = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Warsaw' })); }
+    catch (e) { return; }
+    var dzien = teraz.getDay(), min = teraz.getHours() * 60 + teraz.getMinutes();
+    var roboczy = dzien >= 1 && dzien <= 5;
+    var otwarte = roboczy && min >= 660 && min < 1020;
+    var napis;
+    if (otwarte) napis = 'Teraz otwarte, do 17:00';
+    else if (roboczy && min < 660) napis = 'Dziś otwieram o 11:00';
+    else if (dzien >= 1 && dzien <= 4) napis = 'Teraz zamknięte, jutro od 11:00';
+    else napis = 'Teraz zamknięte, w poniedziałek od 11:00';
+    $$('[data-stan]').forEach(function (el) {
+      el.classList.toggle('otwarte', otwarte);
+      $('span', el).textContent = napis;
+    });
+    $$('#godziny [data-dzien]').forEach(function (row) { row.classList.toggle('dzis', +row.dataset.dzien === dzien); });
+  }
+  stan();
+  setInterval(stan, 60000);
+
+  /* ———————— start ———————— */
+  var poczatek = (location.hash || '').replace('#', '');
+  if (poczatek && poczatek !== 'start' && document.getElementById('v-' + poczatek)) {
+    pokaz(poczatek, { anim: false, przewin: false });
+  } else {
+    zasiej();
+    sterujPetla();
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (aktualny === 'start') zasiej(); });
+})();
+</script>
+</body>
+</html>
